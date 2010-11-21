@@ -153,7 +153,7 @@
     function fetchData(){
         $.ajax({
             type: "GET",
-            url: "/vegvesen/data",
+            url: "/data",
             dataType: "json",
             success: function(data) {
                 $('body').data('trafikk', data.Searchresult['Result-array'].Result.Messages.Message);
