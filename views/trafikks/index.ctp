@@ -12,9 +12,20 @@
         this.length = from < 0 ? this.length + from : from;
         return this.push.apply(this, rest);
     };
+
+    if(!Array.indexOf){
+        Array.prototype.indexOf = function(obj){
+            for(var i=0; i<this.length; i++){
+                if(this[i]==obj){
+                    return i;
+                }
+            }
+            return -1;
+        }
+    }
+    
     var map;
-    
-    
+        
     function checkboxList()
     {   
         // Prepare it!
@@ -142,7 +153,7 @@
     function fetchData(){
         $.ajax({
             type: "GET",
-            url: "/data",
+            url: "/vegvesen/data",
             dataType: "json",
             success: function(data) {
                 $('body').data('trafikk', data.Searchresult['Result-array'].Result.Messages.Message);
