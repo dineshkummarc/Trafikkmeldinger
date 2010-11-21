@@ -142,7 +142,7 @@
     function fetchData(){
         $.ajax({
             type: "GET",
-            url: "/vegvesen/data",
+            url: "/data",
             dataType: "json",
             success: function(data) {
                 $('body').data('trafikk', data.Searchresult['Result-array'].Result.Messages.Message);
@@ -201,7 +201,7 @@
         // no way of resetting as I found, so make new
         var bounds = new google.maps.LatLngBounds();
         
-        //using the filter to see what to draw
+        //using the filter to see what to draw  
         var filter = $(document.body).data('filter');
         
         $(data).each(function(index, value){

@@ -11,10 +11,7 @@ class TrafikksController extends AppController {
     }
 
     function data() {
-        Configure::write('debug', 0);
-        
-        //$this->cacheAction = "10 minutes";
-        $this->CacheAction = "5";
+        $this->CacheAction = "5 minutes";
         if (($json = Cache::read('trafikk')) === false) {
             $json = $this->Trafikk->fetch();
             Cache::write('trafikk', $json);
