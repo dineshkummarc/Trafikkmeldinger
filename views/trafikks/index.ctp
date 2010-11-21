@@ -1,7 +1,6 @@
 
 <div id="fylkesList">
 
-
 </div>
 <div id="messageList">
 
@@ -19,7 +18,8 @@
     function checkboxList()
     {   
         // Prepare it!
-        var template = '<p><input class="fylkeCheck" type="checkbox"  value="${fylke}" /> ${fylke}</p>';
+        // wrapping it around a label for accessibility (clicking on the labels should check/uncheck the checkbox)
+        var template = '<p><input id="location-${checkboxId}" class="fylkeCheck" type="checkbox"value="${fylke}" /> <label for="location-${checkboxId}">${fylke}</label></p>';
         var data = $(document.body).data('trafikk');
         var fylker = [];
         var fylkeTest = [];
@@ -32,7 +32,7 @@
                     // if the string isn't null, prepare it for template
                     if(fylke.string != null)
                     {
-                        fylker.push({fylke: fylke.string});   
+                        fylker.push({fylke: fylke.string, checkboxId: index});  //pass in a unique id for the element 
                         fylkeTest.push(fylke.string);
                     }
                             
