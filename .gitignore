@@ -1,5 +1,2 @@
-#ignore database password files
-database.php
-
 #tmp files
 tmp/
