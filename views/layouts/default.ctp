@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        <?php echo $html->charset('utf-8'); ?>
         <title>Trafikkmeldinger</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
         <?php echo $this->Html->css('main'); ?>
@@ -29,6 +30,9 @@
 
                 </div>
             </div>
+        </div>
+        <div class="footer-notice">
+            <p>Data hentes fra <a href="http://www.vegvesen.no">Statens Vegvesen</a> og brukes p&aring; eget ansvar!</p>
         </div>
         <?php echo $content_for_layout; ?>
     </body>
