@@ -18,8 +18,6 @@
         <div class="right">
             
         </div>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
-
     </body>
 
 </html>

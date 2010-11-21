@@ -7,12 +7,14 @@
 </div>
 <script type="text/javascript">
     // Array Remove - By John Resig (MIT Licensed)
+    // Makes it easier to remove items from an array
     Array.prototype.remove = function(from, to) {
         var rest = this.slice((to || from) + 1 || this.length);
         this.length = from < 0 ? this.length + from : from;
         return this.push.apply(this, rest);
     };
-
+    
+    // IE8 fix for indexOf
     if(!Array.indexOf){
         Array.prototype.indexOf = function(obj){
             for(var i=0; i<this.length; i++){
@@ -157,9 +159,9 @@
             dataType: "json",
             success: function(data) {
                 $('body').data('trafikk', data.Searchresult['Result-array'].Result.Messages.Message);
-                startMap();
-                messageList();
-                checkboxList();
+                // after the data is loaded, start the :*/
+                startMap();     // map
+                checkboxList(); // checkboxList
             }
         });
     }
@@ -168,16 +170,19 @@
     /* requires data to be loaded to set markers properly */
     function startMap()
     {
-        //this gets invoked after store.js loads
+        // We're going to Norway
         var myLatlng = new google.maps.LatLng(65.000, 16.500 );
         var myOptions = {
             zoom: 4,
             center: myLatlng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
+        // start map
         var map = new google.maps.Map(document.getElementById("map_canvas"),  myOptions);
+        // set some bounds
         var bounds = new google.maps.LatLngBounds();
         
+        // store it in the body
         $(document.body).data('map', map);
         $(document.body).data('bounds', bounds);
         
@@ -185,6 +190,8 @@
     
     function drawMarkers()
     {
+        // fetch any markers and remove them from the map before drawing
+        // new markers
         var markersArray = $(document.body).data('markers');
         if(markersArray)
         {
