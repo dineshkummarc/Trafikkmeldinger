@@ -6,6 +6,7 @@ class TrafikksController extends AppController {
     var $components = array('RequestHandler');
     var $helpers = array('Cache');
 
+    // index doesn't do anything
     function index() {
         
     }
@@ -20,7 +21,6 @@ class TrafikksController extends AppController {
         $this->set('json', $json);
         $this->RequestHandler->respondAs('json');
         $this->layout = 'json';
-        //header('Content-type: application/json');
     }
 
 }
