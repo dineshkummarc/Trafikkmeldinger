@@ -18,4 +18,4 @@ provider isn't noticable. No databases were harmed in the creation of this site.
 I wanted this to be a working example within the weekend I started on it, which
 is why it ended up a bit sloppy, but I'll try to get that fixed soon.
 
-Also thanks to [jbueza]<https://github.com/jbueza> for pointing out my stupid mistakes!
+Also thanks to [jbueza](<https://github.com/jbueza>) for pointing out my stupid mistakes!
