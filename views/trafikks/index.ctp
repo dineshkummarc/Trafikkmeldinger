@@ -153,7 +153,7 @@
     function fetchData(){
         $.ajax({
             type: "GET",
-            url: "/data",
+            url: "trafikks/data",
             dataType: "json",
             success: function(data) {
                 $('body').data('trafikk', data.Searchresult['Result-array'].Result.Messages.Message);
