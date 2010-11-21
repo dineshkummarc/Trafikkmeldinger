@@ -13,6 +13,7 @@
         this.length = from < 0 ? this.length + from : from;
         return this.push.apply(this, rest);
     };
+    var map;
     
     
     function checkboxList()
@@ -76,7 +77,7 @@
             }
             // update
             messageList();
-            startMap();
+            drawMarkers();
         });
     }
     
@@ -96,7 +97,6 @@
             '<p>${ingress}</p>'+
             '</div>';
         var data = $(document.body).data('trafikk');
-        //var filter = $(document.body).data('filter');
     
         $(data).each(function(index, value){
     
@@ -166,16 +166,49 @@
         };
         var map = new google.maps.Map(document.getElementById("map_canvas"),  myOptions);
         var bounds = new google.maps.LatLngBounds();
+        
+        $(document.body).data('map', map);
+        $(document.body).data('bounds', bounds);
+        
+    }
+    
+    function drawMarkers()
+    {
+        var markersArray = $(document.body).data('markers');
+        if(markersArray)
+        {
+            for(var i = 0;i< markersArray.length;i++)
+            {
+                try {
+                    markersArray[i].setMap(null);    
+                }
+                catch(err)
+                {
+                    console.log("error!");
+                    console.log(err);
+                }
+            }
+            markersArray.length = 0;
+        }
+        else
+        {
+            markersArray = [];
+        }
+        
         var data = $(document.body).data('trafikk');
-
+        var map = $(document.body).data('map');
+        //var bounds = $(document.body).data('bounds');
+        // no way of resetting as I found, so make new
+        var bounds = new google.maps.LatLngBounds();
+        
+        //using the filter to see what to draw
+        var filter = $(document.body).data('filter');
+        
         $(data).each(function(index, value){
             // filter function
             $(data[index].ActualCounties).each(function(i, county){
 
-                //using the filter
-                ;
                 
-                var filter = $(document.body).data('filter');
                 // if road is in more than 1 county, iterate
                 if($.isArray(county.String ))
                 {
@@ -203,8 +236,7 @@
                     map: map
                 });
                 bounds.extend(veiLatlng);
-                
-            
+                markersArray.push(marker);
             
                 var infowindow = new google.maps.InfoWindow({
                     content: '<div class="mapPopup"><h3>'+data[index].heading+'</h3>'+
@@ -216,7 +248,9 @@
                 });
             }
         });
-        map.fitBounds(bounds);
+        $(document.body).data('markers',markersArray);
+        if(filter.length > 0)
+            map.fitBounds(bounds);
     }
 
     jQuery(document).ready(function($){

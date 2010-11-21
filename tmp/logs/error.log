@@ -1,3 +1,4 @@
 2010-11-19 14:22:15 Warning: Warning (2): json_decode() expects parameter 1 to be string, array given in [C:\web\vegvesen\models\trafikk.php, line 21]
 2010-11-19 15:21:21 Warning: Warning (2): file_get_contents(http://localhost/trafikk/test/trafikk.xml) [<a href='http://php.net/function.file-get-contents'>function.file-get-contents</a>]: failed to open stream: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
  in [C:\web\vegvesen\controllers\trafikks_controller.php, line 31]
+2010-11-21 16:27:35 Warning: Warning (2): Cannot modify header information - headers already sent by (output started at C:\web\vegvesen\models\trafikk.php:26) in [C:\web\cake136\cake\libs\controller\components\request_handler.php, line 758]
