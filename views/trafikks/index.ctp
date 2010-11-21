@@ -112,41 +112,44 @@
         var data = $(document.body).data('trafikk');
     
         $(data).each(function(index, value){
-    
+            console.log('checking');
+            console.log(data[index].messageType.toLowerCase().indexOf('stengt'));
+            if(data[index].messageType.toLowerCase().indexOf('stengt') != -1)
+                {
             // lazy shorthand
             var entry = data[index];
             entry.counties = [];
-   
-            // check counties for match
-            $(entry.ActualCounties).each(function(i, county){
+                // check counties for match
+                $(entry.ActualCounties).each(function(i, county){
 
-                //using the filter
-                var filter = $(document.body).data('filter');
-                // if road is in more than 1 county, iterate
-                if($.isArray(county.String ))
-                {
-                    $(county.String).each(function(j,str) {
-                        // see if county exists in filter
-                        if(filter.indexOf(str) < 0)
-                            return false; // return false if it doesn't'
-                        else
-                            entry.counties.push(str);
-                    });
-                }
-                else
-                {
-                    // same as above, without array
-                    if(filter.indexOf(county.string) < 0)
-                        return false;
+                    //using the filter
+                    var filter = $(document.body).data('filter');
+                    // if road is in more than 1 county, iterate
+                    if($.isArray(county.String ))
+                    {
+                        $(county.String).each(function(j,str) {
+                            // see if county exists in filter
+                            if(filter.indexOf(str) < 0)
+                                return false; // return false if it doesn't'
+                            else
+                                entry.counties.push(str);
+                        });
+                    }
                     else
-                        entry.counties.push(county.string);
+                    {
+                        // same as above, without array
+                        if(filter.indexOf(county.string) < 0)
+                            return false;
+                        else
+                            entry.counties.push(county.string);
+                    }
+                });
+                
+                if(entry.counties.length > 0){
+                    entry.roadType2 = (entry.roadType == 'Ev') ? 'E' : null;
+                    $.tmpl(template, entry).appendTo( "#messageList");
                 }
-            });
-            
-            if(entry.counties.length > 0){
-                entry.roadType2 = (entry.roadType == 'Ev') ? 'E' : null;
-                $.tmpl(template, entry).appendTo( "#messageList");
-            }
+                }
         });
     }
     
