@@ -1,10 +1,6 @@
 
-<div id="fylkesList">
 
-</div>
-<div id="messageList">
 
-</div>
 <script type="text/javascript">
     // Array Remove - By John Resig (MIT Licensed)
     // Makes it easier to remove items from an array
@@ -100,22 +96,21 @@
     {
         // start with resetting the list
         $('#messageList').empty();
-
-        var template =  '<div id="msg-${messagenumber}" class="infodiv urgency-${urgency}">'+
+        $('#messageList').accordion('destroy');
+        
+        var accordionContent = [];
+        var template =  '<div><div id="msg-${messagenumber}" class="infodiv urgency-${urgency}">'+
             '<div class="road-${roadType}">'+
             '<h4>${roadType2} ${roadNumber}</h4>'+
             '<h5>${counties}</h5>'+
             '</div>'+
             '<h3>${heading}</h3>'+
             '<p>${ingress}</p>'+
-            '</div>';
+            '</div></div>'; // added extra div which gets stripped (workaround)
         var data = $(document.body).data('trafikk');
     
         $(data).each(function(index, value){
-            console.log('checking');
-            console.log(data[index].messageType.toLowerCase().indexOf('stengt'));
-            if(data[index].messageType.toLowerCase().indexOf('stengt') != -1)
-                {
+            
             // lazy shorthand
             var entry = data[index];
             entry.counties = [];
@@ -146,11 +141,44 @@
                 });
                 
                 if(entry.counties.length > 0){
+                    var appendTarget = (data[index].messageType.toLowerCase().indexOf('stengt') != -1) ?
+                    1 : (data[index].messageType.toLowerCase().indexOf('kolonne') != -1) ?
+                    2 : 3; // 1 closed roads, 2 partially closed, 3 general info
+                    /*
+                    if(!$('#'+appendTarget).length)
+                    {
+                         $('<h3 id="header-appendTarget">'+appendTarget+'</h3><div id="'+appendTarget+'"></div>').
+                            appendTo("#messageList");
+                    }*/
                     entry.roadType2 = (entry.roadType == 'Ev') ? 'E' : null;
-                    $.tmpl(template, entry).appendTo( "#messageList");
+                    accordionContent.push({ "category" : appendTarget, "html" : $.tmpl(template, entry)[0]});
+                    //$.tmpl(template, entry).appendTo( "#"+appendTarget);
                 }
-                }
+                
         });
+        var stengt = { "id" : 1, "content" : [], "title": "Stengte veier"},
+            kolonne = { "id" : 2, "content" : [], "title": "Kolonnekj&oslash;ring"},
+            generell = { "id" : 3, "content": [], "title" : "Generell/Annen info"};
+            
+        $(accordionContent).each(function(index,value) {
+            
+            switch(value.category)
+            {
+                case 1:
+                    stengt.content.push(value.html.innerHTML);
+                    break;
+                case 2:
+                    kolonne.content.push(value.html.innerHTML);
+                    break;
+                default:
+                    generell.content.push(value.html.innerHTML);
+            }
+        });
+        $('<h3 id="header-'+stengt.id+'">'+stengt.title+'</h3><div id="content-'+stengt.id+'">'+stengt.content.join("\n")+'</div>').appendTo('#messageList');
+        $('<h3 id="header-'+kolonne.id+'">'+kolonne.title+'</h3><div id="content-'+kolonne.id+'">'+kolonne.content.join("\n")+'</div>').appendTo('#messageList');
+        $('<h3 id="header-'+generell.id+'">'+generell.title+'</h3><div id="content-'+generell.id+'">'+generell.content.join("\n")+'</div>').appendTo('#messageList');
+        
+        $( "#messageList" ).accordion({ autoHeight: false });
     }
     
     /* Fetches a JSON file with the data */
@@ -277,7 +305,7 @@
     jQuery(document).ready(function($){
         var filterArray = $(document.body).data('filter', []);
 
-        $('.right').html('<div id="map_canvas" style="width: 500px;height:700px;"></div>');
+        $('.center').html('<div id="map_canvas" style="width: 360px;height:600px;"></div>');
         
         // load the data
         fetchData();
