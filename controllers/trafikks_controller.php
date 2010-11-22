@@ -18,7 +18,7 @@ class TrafikksController extends AppController {
 
     // Data provides the JSON file with all the data
     function data() {
-        // Cache time = 5 minutes
+        // Cache time = 15 minutes
         $this->CacheAction = "15 minutes";
         
         // Try to read cache
