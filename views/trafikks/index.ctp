@@ -4,6 +4,7 @@
 <script type="text/javascript">
     // Array Remove - By John Resig (MIT Licensed)
     // Makes it easier to remove items from an array
+    // =================================================
     Array.prototype.remove = function(from, to) {
         var rest = this.slice((to || from) + 1 || this.length);
         this.length = from < 0 ? this.length + from : from;
@@ -11,6 +12,7 @@
     };
     
     // IE8 fix for indexOf
+    // =================================================
     if(!Array.indexOf){
         Array.prototype.indexOf = function(obj){
             for(var i=0; i<this.length; i++){
@@ -23,7 +25,11 @@
     }
     
     var map;
-        
+
+    // the checkboxList is fired when data is fetched, and will
+    // iterate over all data and add the counties that are found to the
+    // list
+    // =================================================
     function checkboxList()
     {   
         // Prepare it!
@@ -90,8 +96,9 @@
         });
     }
     
-    /*
-     **/
+    // messageList is an addon which provides a different overview over closed 
+    // roads and information in addition to the map view
+    // =================================================
     function messageList()
     {
         // start with resetting the list
@@ -109,6 +116,7 @@
             '</div></div>'; // added extra div which gets stripped (workaround)
         var data = $(document.body).data('trafikk');
     
+        // iterate over the data retrieved
         $(data).each(function(index, value){
             
             // lazy shorthand
@@ -139,29 +147,27 @@
                             entry.counties.push(county.string);
                     }
                 });
-                
+                // if counties is added (it passed the filter)
                 if(entry.counties.length > 0){
+                    // define the category
                     var appendTarget = (data[index].messageType.toLowerCase().indexOf('stengt') != -1) ?
                     1 : (data[index].messageType.toLowerCase().indexOf('kolonne') != -1) ?
                     2 : 3; // 1 closed roads, 2 partially closed, 3 general info
-                    /*
-                    if(!$('#'+appendTarget).length)
-                    {
-                         $('<h3 id="header-appendTarget">'+appendTarget+'</h3><div id="'+appendTarget+'"></div>').
-                            appendTo("#messageList");
-                    }*/
+
+                    // add an E to europe-roads (E6 very popular in Norway)
                     entry.roadType2 = (entry.roadType == 'Ev') ? 'E' : null;
                     accordionContent.push({ "category" : appendTarget, "html" : $.tmpl(template, entry)[0]});
-                    //$.tmpl(template, entry).appendTo( "#"+appendTarget);
+                    
                 }
                 
         });
+        // information we'll use to generate accordion tabs
         var stengt = { "id" : 1, "content" : [], "title": "Stengte veier"},
             kolonne = { "id" : 2, "content" : [], "title": "Kolonnekj&oslash;ring"},
             generell = { "id" : 3, "content": [], "title" : "Generell/Annen info"};
             
         $(accordionContent).each(function(index,value) {
-            
+            // putting each item found earlier into the accordion tab
             switch(value.category)
             {
                 case 1:
@@ -174,15 +180,19 @@
                     generell.content.push(value.html.innerHTML);
             }
         });
+        // then a lazy man's appendTo containing accordion
         $('<h3 id="header-'+stengt.id+'">'+stengt.title+'</h3><div id="content-'+stengt.id+'">'+stengt.content.join("\n")+'</div>').appendTo('#messageList');
         $('<h3 id="header-'+kolonne.id+'">'+kolonne.title+'</h3><div id="content-'+kolonne.id+'">'+kolonne.content.join("\n")+'</div>').appendTo('#messageList');
         $('<h3 id="header-'+generell.id+'">'+generell.title+'</h3><div id="content-'+generell.id+'">'+generell.content.join("\n")+'</div>').appendTo('#messageList');
         
+        // which becomes an accordion right about.. now..
         $( "#messageList" ).accordion({ autoHeight: false });
     }
     
-    /* Fetches a JSON file with the data */
-    /* stors it in jquery data and starts map when successful */
+    // Fetches a JSON file with the data 
+    // stors it in jquery data and starts map when successful 
+    // this should be run first!
+    // =================================================
     function fetchData(){
         $.ajax({
             type: "GET",
@@ -197,8 +207,10 @@
         });
     }
     
-    /* starts the google map */
-    /* requires data to be loaded to set markers properly */
+    // starts the google map 
+    // requires data to be loaded to set markers properly 
+    // to be able to work with it later, we just store it in $.data()
+    // =================================================
     function startMap()
     {
         // We're going to Norway
@@ -219,6 +231,10 @@
         
     }
     
+    // Draw markers draws markers based on the filter set
+    // To avoid ending up with lots of elements, they are 
+    // stored in data(), so they can be retrieved and removed from the map.
+    // =================================================
     function drawMarkers()
     {
         // fetch any markers and remove them from the map before drawing
@@ -311,12 +327,17 @@
             map.fitBounds(bounds);
     }
 
+    // the start button
+    // =================================================
     jQuery(document).ready(function($){
+        // just putting the filterArray into $.data() first as it's initial 
+        // status is empty. Could perhaps be upgraded with a cookie feature
         var filterArray = $(document.body).data('filter', []);
 
+        // unnecessary scripting 101? (website is 1 page!)
         $('.center').html('<div id="map_canvas" style="width: 500px;height:600px;"></div>');
         
-        // load the data
+        // load the data and start the chain reaction
         fetchData();
         
     });
