@@ -37,7 +37,7 @@
         <div class="about">
             <span class="title">Info</span>
             <h2>About</h2>
-            <p>This project was made by me, B&oslash;rge Antonsen, over a weekend and them some.</p>
+            <p>This project was made by me, B&oslash;rge Antonsen over a weekend, and then some.</p>
             <p>Please consider this to be beta, and don't depend on it. For more accurate data please visit the link in bottom left corner.</p>
             <p>For more information visit my <a href="http://github.com/bovan">github</a> page.</p>
         </div>
