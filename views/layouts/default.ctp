@@ -43,10 +43,9 @@
         </div>
         <script type="text/javascript">
             $('.about .title').click(function(){
-                if($('.about').css('top') == "-280px")
-                    $('.about').animate({ top: '10px'}, 1000);
-                else
-                    $('.about').animate({ top: '-280px'}, 1000);
+                $('.about').animate({
+                    top: ($('.about').css('top') == "-280px")? '10px' : "-280px"
+                }, 1000);
             });
         </script>
         <?php echo $content_for_layout; ?>
