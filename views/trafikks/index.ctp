@@ -314,7 +314,7 @@
     jQuery(document).ready(function($){
         var filterArray = $(document.body).data('filter', []);
 
-        $('.center').html('<div id="map_canvas" style="width: 360px;height:600px;"></div>');
+        $('.center').html('<div id="map_canvas" style="width: 500px;height:600px;"></div>');
         
         // load the data
         fetchData();

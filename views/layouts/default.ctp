@@ -34,6 +34,21 @@
         <div class="footer-notice">
             <p>Data hentes fra <a href="http://www.vegvesen.no">Statens Vegvesen</a> og brukes p&aring; eget ansvar!</p>
         </div>
+        <div class="about">
+            <span class="title">Info</span>
+            <h2>About</h2>
+            <p>This project was made by me, B&oslash;rge Antonsen, over a weekend and them some.</p>
+            <p>Please consider this to be beta, and don't depend on it. For more accurate data please visit the link in bottom left corner.</p>
+            <p>For more information visit my <a href="http://github.com/bovan">github</a> page.</p>
+        </div>
+        <script type="text/javascript">
+            $('.about .title').click(function(){
+                if($('.about').css('top') == "-280px")
+                    $('.about').animate({ top: '10px'}, 1000);
+                else
+                    $('.about').animate({ top: '-280px'}, 1000);
+            });
+        </script>
         <?php echo $content_for_layout; ?>
     </body>
 
