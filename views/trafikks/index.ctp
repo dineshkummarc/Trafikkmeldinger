@@ -275,14 +275,23 @@
             });
             
             if(data[index].include)
-            {
+            {   var iconStop = new google.maps.MarkerImage('img/icon-stop.png',
+                    new google.maps.Size(20, 20));
+                var iconWarn = new google.maps.MarkerImage('img/icon-warn.png',
+                    new google.maps.Size(20, 20));
+                var iconInfo = new google.maps.MarkerImage('img/icon-info.png',
+                    new google.maps.Size(20, 20));
+                    
                 var veiX = data[index].Coordinates.StartPoint.xCoord;
                 var veiY = data[index].Coordinates.StartPoint.yCoord;
                 var veiLatlng = new google.maps.LatLng(veiY, veiX);
                 var marker = new google.maps.Marker({
                     position: veiLatlng, 
                     title: data[index].heading + " - " + data[index].messageType,
-                    map: map
+                    map: map, 
+                    icon: (data[index].messageType.toLowerCase().indexOf('stengt') != -1) ?
+                    iconStop : (data[index].messageType.toLowerCase().indexOf('kolonne') != -1) ?
+                    iconWarn : iconInfo
                 });
                 bounds.extend(veiLatlng);
                 markersArray.push(marker);
