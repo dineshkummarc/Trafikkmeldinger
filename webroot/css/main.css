@@ -276,14 +276,17 @@ ul.tooltip li:hover > ul li h3
 {
     font-size: 1.2em;
     border-bottom: 1px solid silver;
-    
+
 }
-.red {
+.red 
+{
     color: #bb0000;
 }
-.blue {
+.blue 
+{
     color: #0000bb;
 }
-.yellow {
+.yellow 
+{
     color: #00bbbb;
 }
