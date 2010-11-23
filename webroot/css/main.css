@@ -23,6 +23,7 @@ body {
 }
 ol, ul {
     list-style: none;
+    -webkit-padding-start: 0;
 }
 blockquote, q {
     quotes: none;
@@ -83,11 +84,15 @@ header h1
     letter-spacing:2px;
     font-family: serif;
 }
-.ticker
+input[type="checkbox"]
 {
-    float: right;
-    width: 300px;
-    border: 1px solid silver;
+    vertical-align: middle;
+}
+input, label
+{
+    font-size: 12px;
+    padding: 5px;
+    line-height: 20px;
 }
 .center
 {
@@ -234,4 +239,51 @@ footer
     border-width: 0 1px 1px 1px;
     border-style: solid;
     border-color: #777;
+}
+ul.tooltip
+{
+    display:inline;
+    float: right;
+}
+ul.tooltip li
+{
+    padding-left: 5px;
+    font-weight: bold;
+    font-size: 0.7em;
+    display:inline;
+    position:relative;
+}
+ul.tooltip li > ul {
+    display:none;
+}
+ul.tooltip li:hover > ul {
+    width: 150px;
+    font-size: 15px;
+    display:block;
+    background-color: white;
+    position:absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+    padding: 10px;
+    border: 1px solid silver;
+}
+ul.tooltip li:hover > ul li
+{
+    display:block;
+}
+ul.tooltip li:hover > ul li h3
+{
+    font-size: 1.2em;
+    border-bottom: 1px solid silver;
+    
+}
+.red {
+    color: #bb0000;
+}
+.blue {
+    color: #0000bb;
+}
+.yellow {
+    color: #00bbbb;
 }

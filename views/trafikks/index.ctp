@@ -34,7 +34,14 @@
     {   
         // Prepare it!
         // wrapping it around a label for accessibility (clicking on the labels should check/uncheck the checkbox)
-        var template = '<p><input id="location-${checkboxId}" class="fylkeCheck" type="checkbox"value="${fylke}" /> <label for="location-${checkboxId}">${fylke}</label></p>';
+        var template =  '<div><input id="location-${checkboxId}" class="fylkeCheck" type="checkbox"value="${fylke}" /> '+
+                        '<label for="location-${checkboxId}">${fylke}</label>'+
+                        '<ul class="tooltip"><li>(<span class="red">${stengt}</span> / <span class="blue">${total}</span>)<ul>'+
+                            '<li><h3>${fylke}</h3></li>'+
+                            '<li>Stengte veier: <span class="red">${stengt}</span></li>'+
+                            '<li>Kolonnekjøring: <span class="yellow">${kolonne}</span></li>'+
+                            '<li>Totale meldinger: <span class="blue">${total}</span></li>'+
+                        '</ul></li></ul></div>';
         var data = $(document.body).data('trafikk');
         var fylker = [];
         var fylkeTest = [];
@@ -47,7 +54,7 @@
                     // if the string isn't null, prepare it for template
                     if(fylke.string != null)
                     {
-                        fylker.push({fylke: fylke.string, checkboxId: index});  //pass in a unique id for the element 
+                        fylker.push({fylke: fylke.string, checkboxId: index, tooltip: null});  //pass in a unique id for the element 
                         fylkeTest.push(fylke.string);
                     }
                             
@@ -66,6 +73,11 @@
         });
         // Add it!
         $(fylker).each(function(index, value){
+            var tooltipData = labelTooltip(value.fylke);
+            value.stengt = tooltipData.stengt;
+            value.kolonne = tooltipData.kolonne;
+            value.total = tooltipData.total;
+            console.log(value);
             $.tmpl(template, value).appendTo("#fylkesList");
         });
     
@@ -96,6 +108,34 @@
         });
     }
     
+    // labelTooltip returns a tooltip for use alongside the checkboxlist-label
+    function labelTooltip(fylke)
+    {
+        var data = $(document.body).data('trafikk');
+        var stengtCount = 0;
+        var kolonneCount = 0;
+        var count = 0;
+        $(data).each(function(index, value){
+            $(data[index].ActualCounties).each(function(i,v){
+                if ((fylke.indexOf(v.string) >= 0))
+                {
+                    // if the string isn't null, prepare it for template
+                    if(v.string != null)
+                    {
+                        (data[index].messageType.toLowerCase().indexOf('stengt') >= 0) ?
+                            stengtCount++ :null;
+                        (data[index].messageType.toLowerCase().indexOf('kolonne') >= 0) ?
+                            kolonneCount++ : null;
+                        count++;
+                    }
+                            
+                }
+            });
+        })
+        return { stengt: stengtCount, kolonne: kolonneCount, total : count };
+        
+    }
+    
     // messageList is an addon which provides a different overview over closed 
     // roads and information in addition to the map view
     // =================================================
@@ -122,49 +162,49 @@
             // lazy shorthand
             var entry = data[index];
             entry.counties = [];
-                // check counties for match
-                $(entry.ActualCounties).each(function(i, county){
+            // check counties for match
+            $(entry.ActualCounties).each(function(i, county){
 
-                    //using the filter
-                    var filter = $(document.body).data('filter');
-                    // if road is in more than 1 county, iterate
-                    if($.isArray(county.String ))
-                    {
-                        $(county.String).each(function(j,str) {
-                            // see if county exists in filter
-                            if(filter.indexOf(str) < 0)
-                                return false; // return false if it doesn't'
-                            else
-                                entry.counties.push(str);
-                        });
-                    }
-                    else
-                    {
-                        // same as above, without array
-                        if(filter.indexOf(county.string) < 0)
-                            return false;
+                //using the filter
+                var filter = $(document.body).data('filter');
+                // if road is in more than 1 county, iterate
+                if($.isArray(county.String ))
+                {
+                    $(county.String).each(function(j,str) {
+                        // see if county exists in filter
+                        if(filter.indexOf(str) < 0)
+                            return false; // return false if it doesn't'
                         else
-                            entry.counties.push(county.string);
-                    }
-                });
-                // if counties is added (it passed the filter)
-                if(entry.counties.length > 0){
-                    // define the category
-                    var appendTarget = (data[index].messageType.toLowerCase().indexOf('stengt') != -1) ?
+                            entry.counties.push(str);
+                    });
+                }
+                else
+                {
+                    // same as above, without array
+                    if(filter.indexOf(county.string) < 0)
+                        return false;
+                    else
+                        entry.counties.push(county.string);
+                }
+            });
+            // if counties is added (it passed the filter)
+            if(entry.counties.length > 0){
+                // define the category
+                var appendTarget = (data[index].messageType.toLowerCase().indexOf('stengt') != -1) ?
                     1 : (data[index].messageType.toLowerCase().indexOf('kolonne') != -1) ?
                     2 : 3; // 1 closed roads, 2 partially closed, 3 general info
 
-                    // add an E to europe-roads (E6 very popular in Norway)
-                    entry.roadType2 = (entry.roadType == 'Ev') ? 'E' : null;
-                    accordionContent.push({ "category" : appendTarget, "html" : $.tmpl(template, entry)[0]});
+                // add an E to europe-roads (E6 very popular in Norway)
+                entry.roadType2 = (entry.roadType == 'Ev') ? 'E' : null;
+                accordionContent.push({ "category" : appendTarget, "html" : $.tmpl(template, entry)[0]});
                     
-                }
+            }
                 
         });
         // information we'll use to generate accordion tabs
         var stengt = { "id" : 1, "content" : [], "title": "Stengte veier"},
-            kolonne = { "id" : 2, "content" : [], "title": "Kolonnekj&oslash;ring"},
-            generell = { "id" : 3, "content": [], "title" : "Generell/Annen info"};
+        kolonne = { "id" : 2, "content" : [], "title": "Kolonnekj&oslash;ring"},
+        generell = { "id" : 3, "content": [], "title" : "Generell/Annen info"};
             
         $(accordionContent).each(function(index,value) {
             // putting each item found earlier into the accordion tab
@@ -292,11 +332,11 @@
             
             if(data[index].include)
             {   var iconStop = new google.maps.MarkerImage('img/icon-stop.png',
-                    new google.maps.Size(20, 20));
+                new google.maps.Size(20, 20));
                 var iconWarn = new google.maps.MarkerImage('img/icon-warn.png',
-                    new google.maps.Size(20, 20));
+                new google.maps.Size(20, 20));
                 var iconInfo = new google.maps.MarkerImage('img/icon-info.png',
-                    new google.maps.Size(20, 20));
+                new google.maps.Size(20, 20));
                     
                 var veiX = data[index].Coordinates.StartPoint.xCoord;
                 var veiY = data[index].Coordinates.StartPoint.yCoord;
@@ -306,8 +346,8 @@
                     title: data[index].heading + " - " + data[index].messageType,
                     map: map, 
                     icon: (data[index].messageType.toLowerCase().indexOf('stengt') != -1) ?
-                    iconStop : (data[index].messageType.toLowerCase().indexOf('kolonne') != -1) ?
-                    iconWarn : iconInfo
+                        iconStop : (data[index].messageType.toLowerCase().indexOf('kolonne') != -1) ?
+                        iconWarn : iconInfo
                 });
                 bounds.extend(veiLatlng);
                 markersArray.push(marker);
