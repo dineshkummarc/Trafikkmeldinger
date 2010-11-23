@@ -107,6 +107,9 @@ input, label
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
+    -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
+    -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
     
 }
 .messageType
@@ -123,15 +126,23 @@ input, label
     -moz-border-radius: 4px;
     border-radius: 4px;
     padding: 10px;
-    
+    -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
+    -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
 }
 #fylkesList
 {
     font-size: 1em;
 }
+#fylkesList label
+{
+    color: #777;
+}
 #messageList
 {
-    font-family: sans-serif;
+    -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
+    -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
 }
 #messageList > h3
 {
@@ -207,8 +218,8 @@ footer
     border-style: solid;
     border-color: silver;
     border-width: 1px 1px 0 0;
-    background: #fff;
-    color: #000;
+    background: #333;
+    color: #fff;
     padding: 5px;
     position: fixed;
     bottom: 0;
