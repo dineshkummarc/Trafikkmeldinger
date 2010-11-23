@@ -110,6 +110,8 @@ input, label
     -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
     -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
     box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
+    zoom: 1;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color='#666666', Direction=135, Strength=5);
     
 }
 .messageType
@@ -129,6 +131,8 @@ input, label
     -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
     -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
     box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
+    zoom: 1;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color='#666666', Direction=135, Strength=5);
 }
 #fylkesList
 {
@@ -143,6 +147,8 @@ input, label
     -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
     -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
     box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
+        zoom: 1;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color='#666666', Direction=135, Strength=5);
 }
 #messageList > h3
 {

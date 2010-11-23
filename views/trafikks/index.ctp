@@ -211,7 +211,6 @@ function messageList()
         // if counties is added (it passed the filter)
         if(entry.counties.length > 0){
             // define the category
-            console.log(data[index].messageType);
             var appendTarget = (data[index].messageType.toLowerCase().indexOf('stengt') != -1) ?
                 1 : (data[index].messageType.toLowerCase().indexOf('kolonne') != -1) ?
                 2 : 3; // 1 closed roads, 2 partially closed, 3 general info
