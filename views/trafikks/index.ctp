@@ -35,13 +35,13 @@
         // Prepare it!
         // wrapping it around a label for accessibility (clicking on the labels should check/uncheck the checkbox)
         var template =  '<div><input id="location-${checkboxId}" class="fylkeCheck" type="checkbox"value="${fylke}" /> '+
-                        '<label for="location-${checkboxId}">${fylke}</label>'+
-                        '<ul class="tooltip"><li>(<span class="red">${stengt}</span> / <span class="blue">${total}</span>)<ul>'+
-                            '<li><h3>${fylke}</h3></li>'+
-                            '<li>Stengte veier: <span class="red">${stengt}</span></li>'+
-                            '<li>Kolonnekjøring: <span class="yellow">${kolonne}</span></li>'+
-                            '<li>Totale meldinger: <span class="blue">${total}</span></li>'+
-                        '</ul></li></ul></div>';
+            '<label for="location-${checkboxId}">${fylke}</label>'+
+            '<ul class="tooltip"><li>(<span class="red">${stengt}</span> / <span class="blue">${total}</span>)<ul>'+
+            '<li><h3>${fylke}</h3></li>'+
+            '<li>Stengte veier: <span class="red">${stengt}</span></li>'+
+            '<li>Kolonnekjøring: <span class="yellow">${kolonne}</span></li>'+
+            '<li>Totale meldinger: <span class="blue">${total}</span></li>'+
+            '</ul></li></ul></div>';
         var data = $(document.body).data('trafikk');
         var fylker = [];
         var fylkeTest = [];
@@ -374,6 +374,7 @@
         if(filter.length > 0)
             map.fitBounds(bounds);
     }
+
 
     // the start button
     // =================================================

@@ -20,7 +20,7 @@
         <body>
             <div id="container">
                 <header>
-                    
+
                 </header>
                 <div class="left">
                     <h2>Velg et fylke eller to</h2>
