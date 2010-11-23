@@ -73,11 +73,13 @@
         });
         // Add it!
         $(fylker).each(function(index, value){
+            // but let's get the tooltip first, now that we have a nice array
             var tooltipData = labelTooltip(value.fylke);
+            // and move it over to the value 
             value.stengt = tooltipData.stengt;
             value.kolonne = tooltipData.kolonne;
             value.total = tooltipData.total;
-            console.log(value);
+            
             $.tmpl(template, value).appendTo("#fylkesList");
         });
     
@@ -108,13 +110,17 @@
         });
     }
     
-    // labelTooltip returns a tooltip for use alongside the checkboxlist-label
+    // labelTooltip returns tooltip data for use alongside the checkboxlist-label
     function labelTooltip(fylke)
     {
         var data = $(document.body).data('trafikk');
+        
+        // the 3 vars which will be returned
         var stengtCount = 0;
         var kolonneCount = 0;
         var count = 0;
+        
+        // iterate and count hits
         $(data).each(function(index, value){
             $(data[index].ActualCounties).each(function(i,v){
                 if ((fylke.indexOf(v.string) >= 0))
@@ -132,6 +138,8 @@
                 }
             });
         })
+        
+        // return it
         return { stengt: stengtCount, kolonne: kolonneCount, total : count };
         
     }
