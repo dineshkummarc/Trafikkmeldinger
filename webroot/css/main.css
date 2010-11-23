@@ -59,22 +59,24 @@ body
 {
     font-size: 15px;
     font-family: sans-serif;
-    background: #fff url('../img/bodybg.png') repeat-x;
+    background: #fff url('../img/bg-bar.png') repeat-x;
     color: #000;
     width: 100%;
     line-height: 1.5;
 }
-.wrapper
+#container
 {
     width: 974px;
     margin: 0 auto;
+    background: #fff url('../img/bg-full.png') no-repeat top left;
 }
-.header
+header
 {
-    height: 65px;
+    color: #fff;
+    height: 70px;
     margin-bottom: 10px;
 }
-.header h1
+header h1
 {
     font-size: 35px;
     line-height: 60px;
@@ -187,7 +189,7 @@ body
 {
     clear:both;
 }
-.footer-notice
+footer
 {
     display:block;
     border-style: solid;
@@ -229,4 +231,7 @@ body
     -webkit-border-radius: 0 0 5px 5px;
     -moz-border-radius: 0 0 5px 5px;
     border-radius: 0 0 5px 5px;
+    border-width: 0 1px 1px 1px;
+    border-style: solid;
+    border-color: #777;
 }
