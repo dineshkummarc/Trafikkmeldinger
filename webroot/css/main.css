@@ -65,8 +65,18 @@ body
     width: 100%;
     line-height: 1.5;
 }
+a:link, a:active, a:visited {
+    color: #9999cc;
+    text-decoration:none;
+}
+a:hover {
+    text-decoration:underline;
+}
+
+
 #container
 {
+    position:relative;
     width: 974px;
     margin: 0 auto;
     background: #fff url('../img/bg-full.jpg') no-repeat top left;
@@ -96,9 +106,13 @@ input, label
 }
 .center
 {
+    position: absolute;
+    top: 80px;
+    left: 200px;
     float: left;
     width: 500px
 }
+
 #map_canvas
 {
     margin: 0 auto;
@@ -107,32 +121,30 @@ input, label
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
-    -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
-    -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
-    box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
-    zoom: 1;
-    filter: progid:DXImageTransform.Microsoft.Shadow(color='#666666', Direction=135, Strength=5);
-    
+    -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
+    -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
 }
 .messageType
 {
     color: #ff3333;
 }
 .left{
-    width: 188px;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 168px;
     margin-right: 10px;
-    float: left;
     background-color: #fff;
     border: 1px solid #aaa;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
     padding: 10px;
-    -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
-    -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
-    box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
-    zoom: 1;
-    filter: progid:DXImageTransform.Microsoft.Shadow(color='#666666', Direction=135, Strength=5);
+    -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
+    -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
+    display:none;
 }
 #fylkesList
 {
@@ -144,11 +156,9 @@ input, label
 }
 #messageList
 {
-    -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
-    -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
-    box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
-        zoom: 1;
-    filter: progid:DXImageTransform.Microsoft.Shadow(color='#666666', Direction=135, Strength=5);
+    -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
+    -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
 }
 #messageList > h3
 {
@@ -165,9 +175,10 @@ input, label
 }
 .right
 {
+    position: absolute;
+    left: 705px;
+    top: 80px;
     font-size: 0.8em;
-    float: left;
-    margin: 0 0 0 10px;
     width: 240px;
 }
 .road-Ev , .road-Rv, .road-Fv, .road-Kv
@@ -230,6 +241,9 @@ footer
     position: fixed;
     bottom: 0;
     left: 0;
+    -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
+    -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
 }
 .about
 {
@@ -313,4 +327,31 @@ ul.tooltip li:hover > ul li h3
 .yellow 
 {
     color: #00bbbb;
+}
+#loadingScreen
+{
+    position:absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -250px;
+    margin-top: -200px;
+    padding: 20px;
+    background: #ccc;
+    width: 500px;
+    border: 5px solid black;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    z-index: 1024;
+    -webkit-box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
+    -moz-box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.4);
+}
+#loadingScreen > div
+{
+    text-align: center;
+}
+.english 
+{
+    color: #666;
 }

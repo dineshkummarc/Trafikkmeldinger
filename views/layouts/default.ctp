@@ -18,6 +18,17 @@
         <?php echo $this->Html->css('jquery-ui-1.8.6.custom'); ?>
         </head>
         <body>
+            <div id="loadingScreen">
+                <h2>Viktig beskjed:</h2>
+                <p>Denne applikasjonen er ikke ferdig utviklet, og kan ha feil og/eller
+                    unøyaktigheter. Den kan brukes for å få et mer oversiktlig bilde over
+                    trafikkmeldinger i Norge, men for data du kan stole på bør du sjekke
+                    statens vegvesen.</p>
+                <p class="english">This application is not complete, and may have flaws and/or inaccuracies.
+                    It may be used for a more complete picture over traffic information in 
+                    Norway, but for data to be trusted you should check Statens Vegvesen.</p>
+                <div><img id="loader-img" src="img/road-ani.gif" /><h3 id="loader-msg">Henter data</h3></div>
+            </div>
             <div id="container">
                 <header>
 
