@@ -108,7 +108,7 @@ input, label
 {
     position: absolute;
     top: 80px;
-    left: 200px;
+    left: 210px;
     float: left;
     width: 500px
 }
@@ -133,7 +133,7 @@ input, label
     position: absolute;
     top: 80px;
     left: 0;
-    width: 168px;
+    width: 178px;
     margin-right: 10px;
     background-color: #fff;
     border: 1px solid #aaa;
@@ -173,19 +173,25 @@ input, label
 {
     margin-bottom: 20px;
 }
+/* fix for too much padding in the UI css */
+.ui-accordion .ui-accordion-content
+{
+    padding: 5px;
+}
 .right
 {
     position: absolute;
-    left: 705px;
+    left: 715px;
     top: 80px;
     font-size: 0.8em;
-    width: 240px;
+    width: 230px;
 }
 .road-Ev , .road-Rv, .road-Fv, .road-Kv
 {
     float: left;
-    width: 80px;
+    width: 65px;
     text-align: center;
+    padding: 5px 5px 5px 0;
 
 }
 .road-Ev h4, .road-Rv h4, .road-Fv h4 , .road-Kv h4
@@ -218,11 +224,11 @@ input, label
 {
     border-bottom: 1px solid silver;
     clear:both;
-    margin: 10px 0;
     min-height: 100px;
 }
 .infodiv h5
 {
+    color: #777;
     font-size: 0.8em;
 }
 .clear

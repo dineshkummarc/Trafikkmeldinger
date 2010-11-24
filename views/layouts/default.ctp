@@ -14,8 +14,8 @@
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
         <link rel="stylesheet" href="css/style.css?v=2">
         <script src="js/libs/modernizr-1.6.min.js"></script>
-        <?php echo $this->Html->css('main'); ?>
         <?php echo $this->Html->css('jquery-ui-1.8.6.custom'); ?>
+        <?php echo $this->Html->css('main'); ?>
         </head>
         <body>
             <div id="loadingScreen">

@@ -195,11 +195,11 @@
         
         var accordionContent = [];
         var template =  '<div><div id="msg-${messagenumber}" class="infodiv urgency-${urgency}">'+
+            '<h3>${heading}</h3>'+
+            '<h5>${counties}</h5>'+
             '<div class="road-${roadType}">'+
             '<h4>${roadType2} ${roadNumber}</h4>'+
-            '<h5>${counties}</h5>'+
             '</div>'+
-            '<h3>${heading}</h3>'+
             '<p>${ingress}</p>'+
             '</div></div>'; // added extra div which gets stripped (workaround)
         var data = $(document.body).data('trafikk');
