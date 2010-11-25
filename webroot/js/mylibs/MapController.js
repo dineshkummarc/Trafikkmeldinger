@@ -1,5 +1,5 @@
 var MapController = function(config) {
-  this.mapElement = null;
+  this.mapElement = config['map'];
   this.loaderObj = {
 
   };
